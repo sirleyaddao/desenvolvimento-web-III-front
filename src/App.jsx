@@ -6,6 +6,8 @@ import CardModulo from './components/CardModulo'
 import Clientes from './pages/Clientes'
 import ListaClientes from './pages/ListaClientes'
 import CadastroCliente from './pages/CadastroCliente'
+import clientesIniciais from './data/clientes'
+import EditarCliente from './pages/EditarCliente'
 
 function App() {
   const [mostrarModulos, setMostrarModulos] = useState(true)
@@ -33,6 +35,34 @@ function App() {
       descricao: 'Registre e consulte as vendas realizadas.',
     },
   ])
+
+  const [clientes, setClientes] = useState(clientesIniciais)
+  
+  function adicionarCliente(novoCliente) {
+  const clienteComId = {
+    id: Date.now(),
+    ...novoCliente,
+  }
+
+  setClientes((listaAtual) => [
+    ...listaAtual,
+    clienteComId,
+  ])
+}
+function excluirCliente(id) {
+  setClientes((listaAtual) =>
+    listaAtual.filter((cliente) => cliente.id !== id)
+  )
+}
+function alterarCliente(clienteAtualizado) {
+  setClientes((listaAtual) =>
+    listaAtual.map((cliente) =>
+      cliente.id === clienteAtualizado.id
+        ? clienteAtualizado
+        : cliente
+    )
+  )
+}
 
   return (
     <Routes>
@@ -76,12 +106,26 @@ function App() {
       <Route path="/clientes" element={<Clientes />} />
         <Route
         path="/clientes/listar"
-        element={<ListaClientes />}
+        element={
+        <ListaClientes clientes={clientes} 
+        aoExcluir={excluirCliente}
+        />}
       />
       <Route
   path="/clientes/cadastrar"
-  element={<CadastroCliente />}
+  element={<CadastroCliente aoCadastrar={adicionarCliente} />}
 />
+    
+    <Route
+  path="/clientes/editar/:id"
+  element={
+    <EditarCliente
+      clientes={clientes}
+      aoAlterar={alterarCliente}
+    />
+  }
+/>
+    
     </Routes>
   )
 }
