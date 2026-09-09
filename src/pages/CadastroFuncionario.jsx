@@ -1,26 +1,28 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-function CadastroFuncinario() {
+function CadastroFuncionario({ aoCadastrar }) {
  const [nome, setNome] = useState('')
- const [cpf, setCpf] = useState('')
- const [telefone, setTelefone] = useState('')
+const [cnpj, setCnpj] = useState('')
  const [email, setEmail] = useState('')
-const [cnpj, setCNPJ] = useState('')
+ const [telefone, setTelefone] = useState('')
  function cadastrarFuncionario(evento) {
  evento.preventDefault()
  const novoFuncionario = {
  nome,
- cpf,
- telefone,
+ cnpj,
  email,
- cnpj
+ telefone
  }
- console.log(novoFuncionario)
- alert('Funcionario cadastrado com sucesso!')
+ aoCadastrar(novoFuncionario)
+setNome('')
+setCnpj('')
+setEmail('')
+setTelefone('')
+alert('Funcionario cadastrado com sucesso!')
  }
  return (
  <main className="pagina-clientes">
-    <h1>Cadastrar novo Funcionario</h1>
+    <h1>Cadastrar novo funcionario</h1>
  <form className="formulario-cliente"
 onSubmit={cadastrarFuncionario}>
  <label htmlFor="nome">Nome</label>
@@ -34,19 +36,13 @@ setNome(evento.target.value)}
  />
  <label htmlFor="cnpj">CNPJ</label>
  <input
- id="CNPJ"
+ id="cnpj"
  type="text"
  value={cnpj}
  onChange={(evento) =>
-setCNPJ(evento.target.value)}
- />
- <label htmlFor="telefone">Telefone</label>
- <input
- id="telefone"
- type="text"
- value={telefone}
- onChange={(evento) =>
-setTelefone(evento.target.value)}
+setCpf(evento.target.value)}
+ maxLength="11"
+ required
  />
  <label htmlFor="email">E-mail</label>
  <input
@@ -56,11 +52,18 @@ setTelefone(evento.target.value)}
  onChange={(evento) =>
 setEmail(evento.target.value)}
  />
- 
- <button type="submit">Cadastrar Funcionario</button>
+ <label htmlFor="telefone">Telefone</label>
+ <input
+ id="telefone"
+ type="text"
+ value={telefone}
+ onChange={(evento) =>
+setTelefone(evento.target.value)}
+ />
+ <button type="submit">Cadastrar funcionario</button>
  </form>
  <Link to="/funcionarios">Voltar para Gerenciamento de Funcionarios</Link>
 </main>
  )
 }
-export default CadastroFuncinario
+export default CadastroFuncionario

@@ -11,6 +11,8 @@ import EditarCliente from './pages/EditarCliente'
 import Funcionários from './pages/Funcionarios'
 import ListaFuncionarios from './pages/ListaFuncionarios'
 import CadastroFuncionario from './pages/CadastroFuncionario'
+import EditarFuncionario from './pages/EditarFuncionario'
+import funcionariosIniciais from './data/funcionarios'
 function App() {
  const [mostrarModulos, setMostrarModulos] =
 useState(true)
@@ -60,6 +62,31 @@ function alterarCliente(clienteAtualizado) {
  cliente.id === clienteAtualizado.id
  ? clienteAtualizado
  : cliente
+ )
+ )
+}
+ const [funcionarios, setFuncionarios] = useState(funcionariosIniciais)
+function adicionarFuncionario(novoFuncionario) {
+ const funcionarioComId = {
+ id: Date.now(),
+ ...novoFuncionario,
+ }
+ setFuncionarios((listaAtual) => [
+ ...listaAtual,
+ funcionarioComId,
+ ])
+}
+function excluirFuncionario(id) {
+ setFuncionarios((listaAtual) =>
+ listaAtual.filter((funcionario) => funcionario.id !== id)
+ )
+}
+function alterarFuncionario(funcionarioAtualizado) {
+ setFuncionarios((listaAtual) =>
+ listaAtual.map((funcionario) =>
+ funcionario.id === funcionarioAtualizado.id
+ ? funcionarioAtualizado
+ : funcionario
  )
  )
 }
@@ -118,10 +145,13 @@ element={<CadastroCliente aoCadastrar={adicionarCliente} />}/>
  element={<Funcionários />} />
  <Route
  path="/funcionarios/listar"
- element={<ListaFuncionarios />}/>
+ element={<ListaFuncionarios funcionários = {funcionários} aoExcluir={excluirFuncionario} />}/>
  <Route
  path="/funcionarios/cadastrar"
- element={<CadastroFuncionario />}/>
+ element={<CadastroFuncionario aoCadastrar={adicionarFuncionario} />}/>
+ <Route
+ path="/funcionarios/editar/:id"
+ element={<EditarFuncionario funcionarios={funcionarios} aoAlterar={alterarFuncionario}/>}/>
  </Routes>
  )
 }
