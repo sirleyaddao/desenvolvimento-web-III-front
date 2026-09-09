@@ -8,7 +8,7 @@ import ListaClientes from './pages/ListaClientes'
 import CadastroCliente from './pages/CadastroCliente'
 import clientesIniciais from './data/clientes'
 import EditarCliente from './pages/EditarCliente'
-import Funcionários from './pages/Funcionarios'
+import Funcionarios from './pages/Funcionarios'
 import ListaFuncionarios from './pages/ListaFuncionarios'
 import CadastroFuncionario from './pages/CadastroFuncionario'
 import EditarFuncionario from './pages/EditarFuncionario'
@@ -30,8 +30,8 @@ useState(true)
  },
  {
  id: 3,
- titulo: 'Gerenciamento de Funcionários',
- descricao: 'Cadastre e consulte os funcionários da empresa.',
+ titulo: 'Gerenciamento de Funcionarios',
+ descricao: 'Cadastre e consulte os funcionarios da empresa.',
  rota: '/funcionarios'
  },
  {
@@ -142,10 +142,10 @@ element={<CadastroCliente aoCadastrar={adicionarCliente} />}/>
  element={<EditarCliente clientes={clientes} aoAlterar={alterarCliente}/>}/>
  <Route 
  path="/funcionarios" 
- element={<Funcionários />} />
+ element={<Funcionarios />} />
  <Route
  path="/funcionarios/listar"
- element={<ListaFuncionarios funcionários = {funcionários} aoExcluir={excluirFuncionario} />}/>
+ element={<ListaFuncionarios funcionarios = {funcionarios} aoExcluir={excluirFuncionario} />}/>
  <Route
  path="/funcionarios/cadastrar"
  element={<CadastroFuncionario aoCadastrar={adicionarFuncionario} />}/>

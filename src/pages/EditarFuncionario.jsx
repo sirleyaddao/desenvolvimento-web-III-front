@@ -7,7 +7,7 @@ function EditarFuncionario({ funcionarios, aoAlterar }) {
  (funcionario) => funcionario.id === Number(id)
  )
  const [nome, setNome] = useState(funcionarioEncontrado?.nome ?? '')
- const [cnpj, setCnpj] = useState(funcionarioEncontrado?.cpf ?? '')
+ const [cnpj, setCnpj] = useState(funcionarioEncontrado?.cnpj ?? '')
  const [email, setEmail] = useState(funcionarioEncontrado?.email ??'')
  const [telefone, setTelefone] = useState(funcionarioEncontrado?.telefone ?? '')
  function alterarFuncionario(evento) {
@@ -15,7 +15,7 @@ function EditarFuncionario({ funcionarios, aoAlterar }) {
  const funcionarioAtualizado = {
  id: Number(id),
  nome,
- cpf,
+ cnpj,
  telefone,
  email,
  }
@@ -49,9 +49,9 @@ function EditarFuncionario({ funcionarios, aoAlterar }) {
  onChange={(evento) => setNome(evento.target.value)}
  required
  />
- <label htmlFor="cpf">CPF</label>
+ <label htmlFor="cnpj">CNPJ</label>
  <input
- id="cpf"
+ id="cnpj"
  type="text"
  value={cnpj}
  onChange={(evento) => setCnpj(evento.target.value)}

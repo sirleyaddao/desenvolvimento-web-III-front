@@ -40,7 +40,7 @@ setNome(evento.target.value)}
  type="text"
  value={cnpj}
  onChange={(evento) =>
-setCpf(evento.target.value)}
+setCnpj(evento.target.value)}
  maxLength="11"
  required
  />
