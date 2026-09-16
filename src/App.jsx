@@ -72,16 +72,31 @@ function App() {
           </div>
         }
       />
-
-      <Route path="/clientes" element={<Clientes />} />
+       <Route path="/clientes" element={<Clientes />} />
         <Route
         path="/clientes/listar"
-        element={<ListaClientes />}
+        element={
+        <ListaClientes clientes={clientes} 
+        aoExcluir={excluirCliente}
+        />}
       />
       <Route
   path="/clientes/cadastrar"
-  element={<CadastroCliente />}
+  element={<CadastroCliente 
+  clientes={clientes}
+  aoCadastrar={adicionarCliente} />}
 />
+    
+    <Route
+  path="/clientes/editar/:id"
+  element={
+    <EditarCliente
+      clientes={clientes}
+      aoAlterar={alterarCliente}
+    />
+  }
+/>
+    
     </Routes>
   )
 }
